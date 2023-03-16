@@ -10,7 +10,6 @@ RETURN_BACK_TEXT = "⬅ Назад"
 def main_menu(user_id):
     keyboard = ReplyKeyboardMarkup()
     keyboard.row("Прайс лист")
-
     with open('tgbot/data/price.json', 'r') as f:
         menu = json.load(f)
         for category in menu.keys():

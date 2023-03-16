@@ -45,6 +45,9 @@ def main():
                     "🖥 Mac": {"current_category": "🍎Apple", "current_subcategory": "iMac"},
                     "💻 MacBook": {"current_category": "🍎Apple", "current_subcategory": "MacBook"},
                     "🎧 AirPods": {"current_category": "🍎Apple", "current_subcategory": "AirPods & Accs"},
+                    "📺 TV": {"current_category": "🍎Apple", "current_subcategory": "AirPods & Accs"},
+                    "🖱 Magic Mouse": {"current_category": "🍎Apple", "current_subcategory": "AirPods & Accs"},
+                    "🖊 Pencil": {"current_category": "🍎Apple", "current_subcategory": "AirPods & Accs"},
                     "📱 Redmi": {"current_category": "📞Android", "current_subcategory": "Redmi"},
                     "📱 Poco": {"current_category": "📞Android", "current_subcategory": "POCO"},
                     "📱 Mi": {"current_category": "📞Android", "current_subcategory": "Xiaomi & Mi"},
@@ -56,6 +59,7 @@ def main():
                     "🔘 Mi": {"current_category": "📞Android", "current_subcategory": "Xiaomi & Mi"},
                     "🔳 Lenovo Tab": {"current_category": "📞Android", "current_subcategory": "Tab"},
                     "SM-": {"current_category": "📞Android", "current_subcategory": "Samsung"},
+                    "🔌 Adapter": {"current_category": "📞Android", "current_subcategory": "Samsung"},
                     "📱 OnePlus": {"current_category": "📞Android", "current_subcategory": "One Plus"},
                     "📱 Google Pixel": {"current_category": "📞Android", "current_subcategory": "Google Pixel"},
                     "🎮 DualSense": {"current_category": "🎮Console", "current_subcategory": "Dualsense"},
@@ -67,10 +71,12 @@ def main():
             menu[data['current_category']][data['current_subcategory']] = {}
         else:
             menu[data['current_category']][data['current_subcategory']] = {}
+    # menu['Другое'] = {}
+    # menu['Другое']['Все товары'] = {}
     current_category = None
     current_subcategory = None
     product = None
-    with open("price.txt", "r", encoding='utf-8') as file:
+    with open("tgbot/data/price.txt", "r", encoding='utf-8') as file:
         lines = file.readlines()
         for line in lines:
             line = line.strip()
@@ -82,7 +88,12 @@ def main():
                     menu[current_category][current_subcategory][product] = {}
                 elif 'От' in line:
                     menu[current_category][current_subcategory][product][line.split('-')[0]] = line.split('-')[1]
-    with open('../data/price.json', "w") as outfile:
+                # else:
+                #     current_category = 'Другое'
+                #     current_subcategory = 'Все товары'
+                #     product = line
+                #     menu[current_category][current_subcategory][product] = {}
+    with open('tgbot/data/price.json', "w") as outfile:
         json.dump(menu, outfile)
 
 
